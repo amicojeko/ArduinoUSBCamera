@@ -56,7 +56,7 @@ void loop(){
     while(p.running());  
     Serial.println("picture taken");
     
-    p.runShellCommand("python " + path + "temboo.py " + path + filename);
+    p.runShellCommand("python " + path + "sendphoto.py " + path + filename);
     while(p.running());  
     Serial.println("picture sent");
   } 
