@@ -37,28 +37,28 @@ void loop(){
   
   if (buttonState == LOW) {
     filename = "";
-    p.runShellCommand("date +%s");
-    while(p.running()); 
+    p.runShellCommand("date +%s"); //generate a timestamp
+    while(p.running()); // wait until the command has finished running
     
     while (p.available()>0) {
-      char c = p.read();
-      filename += c;
+      char c = p.read(); //reads the first available character
+      filename += c; //and adds it to the filename string
     } 
     
-    filename.trim();
-    filename += ".png";
+    filename.trim(); //used to avoid trailing spaces or newline characters
+    filename += ".png"; //finally I add the png extension
     
-    Serial.println(filename);
+    Serial.println(filename); // I send the generated filename to the Serial port for debugging
     
-    digitalWrite(ledPin, HIGH);  
+    digitalWrite(ledPin, HIGH); // The led indicates that I'm taking the picture 
     
-    p.runShellCommand("fswebcam " + path + filename);
-    while(p.running());  
-    Serial.println("picture taken");
+    p.runShellCommand("fswebcam " + path + filename); //let's take the picture
+    while(p.running());  //waits till the picture is saved
+    Serial.println("picture taken"); 
     
-    p.runShellCommand("python " + path + "sendphoto.py " + path + filename);
-    while(p.running());  
-    Serial.println("picture sent");
+    p.runShellCommand("python " + path + "sendphoto.py " + path + filename); //sends the picture to facebook 
+    while(p.running()); 
+    Serial.println("picture sent"); //last debug message
   } 
   else {
     digitalWrite(ledPin, LOW); 
