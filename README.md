@@ -249,27 +249,3 @@ Cheers and be happy!
 
 
 
-
-
-- opkg install ffserver
-
-
-
-VIDEO
-
-
-opkg install v4l-utils
-
-
-
-
-ffmpeg -v verbose -r 1 -s -f v4l2  -y -i /dev/video0 -sameq -vframes 1 test.jpg
-
-ffmpeg -v verbose -r 1 -s 640x480 -f v4l2  -y -i /dev/video0 -sameq -vframes 1 test2.jpg
-
-ffmpeg -v verbose -r 5 -s 320x240 -f v4l2 -i /dev/video0 -c:v flv http://localhost:8090/videofeed.ffm
-
-
-
-install coreutils-base64
-
